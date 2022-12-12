@@ -25,10 +25,14 @@ For the project an own Git Flow is defined.
 The core branch to develop is the develop branch. This is the branch where the actual work is happening. The changes in the branch are not released directly. All code changes branch off the develop branch (called feature branch) and merged back to develop branch after code review. If a release starts (draft stage), a new release branch with next version is created out of the development branch. To finalize a release, the release branch is merged to the main branch.
 
 ## Milestones
-- ??.??. Git Flow defined
-- ??.??.
+- 31.12. Git Flow defined and installed
+- 06.01. GitHub Actions implemented
+- 13.01. GitHub Actions tested
+- 15.01. Documentation finished
 - 18.01. Presentation
 
 ## Responsibilities
-- Jürgen: Everything
-- Jakob: Nothing
+- Git Flow Definition and Installation: both
+- GitHub Actions Implemenation: Jakob
+- GitHub Actions Tests: Jürgen
+- Documenation: both
