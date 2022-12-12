@@ -7,7 +7,7 @@
 ## Project Description
 Project: GitHub Action and Git Flow
 
-The goal of this project is to implement a Continuous Integration workflow for our chosen Java project "Black Jack". For this process GitHub is used as version control system and GitHub Actions is used as a build tool. Furthermore, a Git Flow is defined for this project.
+The goal of this project is to implement a Continuous Integration workflow for our chosen Java project [Black Jack](https://github.com/jdarneth/Continous-Integration-GitHub/tree/main/Blackjack). For this process GitHub is used as version control system and GitHub Actions is used as a build tool. Furthermore, a Git Flow is defined for this project.
 
 ### GitHub Actions
 With GitHub Actions the a workflow for the Continuous Integration will be defined. It will be used to automatically test and release the code.
