@@ -33,6 +33,6 @@ The core branch to develop is the develop branch. This is the branch where the a
 
 ## Responsibilities
 - Git Flow Definition and Installation: Jürgen
-- GitHub Actions Implemenation: Jakob
+- GitHub Actions Implementation: Jakob
 - GitHub Actions Tests: both
 - Documentation: both
