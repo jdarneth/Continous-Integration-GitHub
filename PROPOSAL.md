@@ -32,7 +32,7 @@ The core branch to develop is the develop branch. This is the branch where the a
 - 18.01. Presentation
 
 ## Responsibilities
-- Git Flow Definition and Installation: both
+- Git Flow Definition and Installation: Jürgen
 - GitHub Actions Implemenation: Jakob
-- GitHub Actions Tests: Jürgen
-- Documenation: both
+- GitHub Actions Tests: both
+- Documentation: both
