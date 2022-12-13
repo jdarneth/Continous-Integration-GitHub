@@ -7,7 +7,7 @@
 ## Project Description
 Project: GitHub Action and Git Flow
 
-The goal of this project is to implement a Continuous Integration workflow for our chosen Java project [Black Jack](https://github.com/jdarneth/Continous-Integration-GitHub/tree/main/Blackjack). For this process GitHub (Git) is used as version control system and GitHub Actions (with Gradle) is used as a build tool. The result of the build (the artifact) is a JAR file, which persisted for each version in a defined folder in the repository. Furthermore, a Git Flow is defined for this project.
+The goal of this project is to implement a Continuous Integration workflow for our chosen Java project [Black Jack](https://github.com/jdarneth/Continous-Integration-GitHub/tree/main/Blackjack). For this process GitHub (Git) is used as version control system and GitHub Actions (with Gradle) is used as a build tool. The result of the build (the artifact) is a JAR file, which is persisted for each version in a defined folder in the repository and a GitHub public release is created. Furthermore, a Git Flow is defined for this project.
 
 ### Git Flow
 For the project an own Git Flow is defined. 
