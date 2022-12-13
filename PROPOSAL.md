@@ -49,7 +49,7 @@ With GitHub Actions a workflow for the Continuous Integration will be defined. I
 * Trigger following workflow on GIT push. Execute build and tests.
 
 ## Milestones
-- 31.12. Git Flow defined and installed
+- 24.12. Git Flow defined and installed
 - 06.01. GitHub Actions implemented
 - 13.01. GitHub Actions tested
 - 15.01. Documentation finished
