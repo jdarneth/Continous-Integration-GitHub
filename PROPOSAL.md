@@ -56,8 +56,9 @@ With GitHub Actions a workflow for the Continuous Integration will be defined. I
 - 18.01. Presentation
 
 ## Responsibilities
-- Git Flow Definition and Installation: Jürgen
-- GitHub Actions Implementation: Jakob
+- Git Flow Definition and Installation: both
+- GitHub Actions for push: Jakob
+- GitHub Actions for issues: Jürgen 
 - GitHub Actions Tests: both
 - Documentation: both
 
