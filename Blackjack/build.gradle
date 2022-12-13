@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'blackjack'
-version '1.0'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -12,6 +12,17 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+java {
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': 'blackjack.GameMain')
+    }
 }
 
 test {
