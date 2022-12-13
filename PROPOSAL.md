@@ -27,7 +27,9 @@ The core branch to develop is the develop branch. This is the branch where the a
 ### GitHub Actions
 With GitHub Actions the a workflow for the Continuous Integration will be defined. It will be used to automatically test and release the code.
 
-**Feature branch**: Trigger following workflow on GIT push. Execute build and tests (can fail temporarily).
+**Feature branch**: 
+
+* Trigger following workflow on GIT push. Execute build and tests (can fail temporarily).
 
 **Develop branch**: 
 
@@ -37,9 +39,11 @@ With GitHub Actions the a workflow for the Continuous Integration will be define
 **Release branch**: 
 
 * Trigger following workflow on GIT push. Execute build and tests (must be successful). 
-* If the event *CloseIssue* occurs, the release gets finished. This means that it is merged back to the main branch and the develop branch. A GitHub public release is created.
+* If the event *CloseIssue* occurs, the release gets finished. This means that it is merged back to the main branch and the develop branch. A GitHub public release is created. The artifact from the build is persisted (annotated by the version) in the repository. Create a new Tag with new version on main branch.
 
-**Main branch**: Execute build and tests.
+**Main branch**: 
+
+* No special workflow (only stable versions are merged).
 
 ## Milestones
 - 31.12. Git Flow defined and installed
