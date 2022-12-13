@@ -21,7 +21,7 @@ The goal of this project is to implement a Continuous Integration workflow for o
 
 **Workflow**:
 
-The core branch to develop is the develop branch. This is the branch where the actual work is happening. The changes in the branch are not released directly. All code changes branch off the develop branch (called feature branch) and merged back to develop branch after code review. If a release starts (draft stage), a new release branch with next version is created out of the development branch. To finalize a release, the release branch is merged to the main branch. Hotfixes are only for time-critical bugs, which should be released again as soon as possible. 
+The core branch to develop is the develop branch. This is the branch where the actual work is happening. The changes in the branch are not released directly. All code changes branch off the develop branch (called feature branch) and merged back to develop branch after code review. If a release starts (draft stage), a new release branch with next version is created out of the development branch by creating an issue. To finalize a release, the issue will be closed. The release branch is merged back to the main branch. Hotfixes are only for time-critical bugs, which should be released again as soon as possible. 
 
 ### GitHub Actions
 With GitHub Actions a workflow for the Continuous Integration will be defined. It will be used to automatically test and release the code.
@@ -44,6 +44,10 @@ With GitHub Actions a workflow for the Continuous Integration will be defined. I
 
 * No special workflow (only stable versions are merged).
 
+**Hotfix branch**:
+
+* Trigger following workflow on GIT push. Execute build and tests.
+
 ## Milestones
 - 31.12. Git Flow defined and installed
 - 06.01. GitHub Actions implemented
@@ -58,8 +62,8 @@ With GitHub Actions a workflow for the Continuous Integration will be defined. I
 - Documentation: both
 
 ## Presentation
-- Adding a new feature.
+- Add new feature.
 - Merge feature.
-- Create release.
+- Create release by creating issue.
 - Add bug fixes.
-- Merge release.
+- Merge release by closing issue.
