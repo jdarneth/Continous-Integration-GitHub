@@ -11,14 +11,8 @@ jobs:
       if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
       steps:
         - uses: actions/checkout@v3
-
-        - name: Extract version from issue title
-          run: |
-            TITLE="${{ github.event.issue.title }}"
-            VERSION=${TITLE#Release }
-            echo "::set-env name=RELEASE_VERSION::$VERSION"
             
-        - name: Extract branch name
+        - name: Extract release version
           shell: bash
           run: |
             TITLE="${{ github.event.issue.title }}"
