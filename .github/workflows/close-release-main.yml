@@ -56,8 +56,8 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ github.token }}
             
-        - name: build artifacts
-          run: make build-artifact
+        - name: build artifact
+          run: make build-linux
           
         - name: upload artifact
           uses: actions/upload-release-asset@v1
