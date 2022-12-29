@@ -3,7 +3,7 @@ name: HOTFIX | build and test
 on:
   push:
     branches:
-      - 'hotfix'
+      - 'hotfix/*'
 
 permissions:
   contents: read
