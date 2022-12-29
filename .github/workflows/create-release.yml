@@ -21,7 +21,9 @@ jobs:
           id: extract_release_version
 
         - name: Create release branch
-          run: git checkout -b release/${{ steps.extract_release_version.outputs.version }}
+          run: |
+            git switch develop
+            git checkout -b release/${{ steps.extract_release_version.outputs.version }}
 
         - name: Initialize mandatory git config
           run: |
