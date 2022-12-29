@@ -32,7 +32,7 @@ jobs:
 
         - name: Change version in gradle.properties
           run: |
-            echo "CUR_VERSION=${{ steps.extract_release_version.outputs.version }}" > ~/gradle.properties
+            echo "CUR_VERSION=${{ steps.extract_release_version.outputs.version }}" > gradle.properties
 
         - name: Push new branch
           run: git push origin release/${{ steps.extract_release_version.outputs.version }}
