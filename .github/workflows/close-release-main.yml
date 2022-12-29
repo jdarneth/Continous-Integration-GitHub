@@ -48,7 +48,23 @@ jobs:
             merge-method: merge
         
         - name: create release
-          uses: ncipollo/release-action@v1
+          uses: actions/release-action@v1
+          id: create_release
           with:
-            tag: "release/${{ steps.extract_release_version.outputs.version }}"
-            artifacts: build/libs/BLACKJACK-${{ steps.extract_release_version.outputs.version }}
+            tag_name: "release/${{ steps.extract_release_version.outputs.version }}"
+            release_name: "release/${{ steps.extract_release_version.outputs.version }}"
+          env:
+            GITHUB_TOKEN: ${{ github.token }}
+            
+        - name: build artifacts
+          run: make build-artifact
+          
+        - name: upload artifact
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ github.token }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: BLACKJACK-${{ steps.extract_release_version.outputs.version }}
+            asset_name: BLACKJACK-${{ steps.extract_release_version.outputs.version }}
+            asset_content_type: application/zip
