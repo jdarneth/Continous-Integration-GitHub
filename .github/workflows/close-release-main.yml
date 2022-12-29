@@ -48,28 +48,7 @@ jobs:
             merge-method: merge
         
         - name: create release
-          uses: actions/create-release@v1
-          id: create_release
+          uses: ncipollo/release-action@v1
           with:
-            tag_name: "release/${{ steps.extract_release_version.outputs.version }}"
-            release_name: "release/${{ steps.extract_release_version.outputs.version }}"
-          env:
-            GITHUB_TOKEN: ${{ github.token }}
-            
-        - name: Run chmod to make gradlew executable
-          run: chmod +x ./gradlew
-
-        - name: Build with Gradle
-          uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-          with:
-            arguments: build
-          
-        - name: upload artifact
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ github.token }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: BLACKJACK-${{ steps.extract_release_version.outputs.version }}
-            asset_name: BLACKJACK-${{ steps.extract_release_version.outputs.version }}
-            asset_content_type: application/zip
+            tag: "release/${{ steps.extract_release_version.outputs.version }}"
+            artifacts: ""
