@@ -29,18 +29,45 @@ jobs:
             git config user.email "actions@github.com"
             git config --global --add safe.directory /github/workspace
         
-        - name: Merge release to main
-          run: |
-              git fetch 
-              git checkout main
-              git pull
-              git merge --no-ff release/${{ steps.extract_release_version.outputs.version }} -m "Auto-merge release to main"
-              git push
-
-        - name: Merge release to develop
-          run: |
-              git fetch 
-              git checkout develop
-              git pull
-              git merge --no-ff release/${{ steps.extract_release_version.outputs.version }} -m "Auto-merge release to develop"
-              git push
+        - name: create pull request for main
+          id: open-pr-main
+          uses: repo-sync/pull-request@v2
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
+            destination_branch: main
+            pr_title: "auto merge"
+            pr_body: "Automated Pull Request"
+            
+        - name: create pull request for develop
+          id: open-pr-develop
+          uses: repo-sync/pull-request@v2
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
+            destination_branch: develop
+            pr_title: "auto merge"
+            pr_body: "Automated Pull Request"
+            
+        - name: enable automerge for main
+          if: steps.open-pr-main.outputs.pr_number != ''
+          uses: peter-evans/enable-pull-request-automerge@v2
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
+            merge-method: merge
+            
+        - name: enable automerge for develop
+          if: steps.open-pr-develop.outputs.pr_number != ''
+          uses: peter-evans/enable-pull-request-automerge@v2
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            pull-request-number: ${{ steps.open-pr-develop.outputs.pr_number }}
+            merge-method: merge
+        
+        - name: create release
+          uses: ncipollo/release-action@v1
+          with:
+            tag: "release/${{ steps.extract_release_version.outputs.version }}"
+            artifacts: ""
+        
