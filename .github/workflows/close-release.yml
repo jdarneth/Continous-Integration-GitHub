@@ -39,6 +39,14 @@ jobs:
             pr_title: "auto merge"
             pr_body: "Automated Pull Request"
             
+        - name: enable automerge for main
+          if: steps.open-pr-main.outputs.pr_number != ''
+          uses: peter-evans/enable-pull-request-automerge@v2
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
+            merge-method: merge
+        
         - name: create pull request for develop
           id: open-pr-develop
           uses: repo-sync/pull-request@v2
@@ -48,14 +56,6 @@ jobs:
             destination_branch: develop
             pr_title: "auto merge"
             pr_body: "Automated Pull Request"
-            
-        - name: enable automerge for main
-          if: steps.open-pr-main.outputs.pr_number != ''
-          uses: peter-evans/enable-pull-request-automerge@v2
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
-            merge-method: merge
             
         - name: enable automerge for develop
           if: steps.open-pr-develop.outputs.pr_number != ''
@@ -70,4 +70,3 @@ jobs:
           with:
             tag: "release/${{ steps.extract_release_version.outputs.version }}"
             artifacts: ""
-        
