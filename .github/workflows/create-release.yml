@@ -11,6 +11,8 @@ jobs:
       if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
       steps:
         - uses: actions/checkout@v3
+          with: 
+            ref: develop
             
         - name: Extract release version
           shell: bash
@@ -21,9 +23,7 @@ jobs:
           id: extract_release_version
 
         - name: Create release branch
-          run: |
-            git switch develop
-            git checkout -b release/${{ steps.extract_release_version.outputs.version }}
+          run: git checkout -b release/${{ steps.extract_release_version.outputs.version }}
 
         - name: Initialize mandatory git config
           run: |
