@@ -31,8 +31,11 @@ jobs:
             git config user.email "noreply@github.com"
 
         - name: Change version in gradle.properties
-          run: |
-            echo "CUR_VERSION=${{ steps.extract_release_version.outputs.version }}" > gradle.properties
+          uses: DamianReeves/write-file-action@v1.2
+          with:
+            path: gradle.properties
+            contents: "CUR_VERSION=${{ steps.extract_release_version.outputs.version }}"
+            write-mode: 'overwrite'
 
         - name: Push new branch
           run: git push origin release/${{ steps.extract_release_version.outputs.version }}
