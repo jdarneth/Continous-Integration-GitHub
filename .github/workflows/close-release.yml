@@ -29,24 +29,6 @@ jobs:
             git config user.email "actions@github.com"
             git config --global --add safe.directory /github/workspace
         
-        - name: create pull request for main
-          id: open-pr-main
-          uses: repo-sync/pull-request@v2
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
-            destination_branch: main
-            pr_title: "auto merge main"
-            pr_body: "auto merge main"
-            
-        - name: enable automerge for main
-          if: steps.open-pr-main.outputs.pr_number != ''
-          uses: peter-evans/enable-pull-request-automerge@v2
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
-            merge-method: merge
-        
         - name: create pull request for develop
           id: open-pr-develop
           uses: repo-sync/pull-request@v2
