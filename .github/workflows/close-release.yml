@@ -39,9 +39,14 @@ jobs:
           with:
             from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             to_branch: develop
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
         - name: Merge to main
           uses: bambamboole/gha-upmerge@v1.0.1
           with:
             from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             to_branch: main
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
