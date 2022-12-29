@@ -51,4 +51,4 @@ jobs:
           uses: ncipollo/release-action@v1
           with:
             tag: "release/${{ steps.extract_release_version.outputs.version }}"
-            artifacts: build/libs/BLACKJACK-"release/${{ steps.extract_release_version.outputs.version }}"
+            artifacts: build/libs/BLACKJACK-"${{ steps.extract_release_version.outputs.version }}"
