@@ -36,8 +36,8 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             destination_branch: main
-            pr_title: "auto merge"
-            pr_body: "Automated Pull Request"
+            pr_title: "auto merge main"
+            pr_body: "auto merge main"
             
         - name: enable automerge for main
           if: steps.open-pr-main.outputs.pr_number != ''
@@ -54,8 +54,8 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             destination_branch: develop
-            pr_title: "auto merge"
-            pr_body: "Automated Pull Request"
+            pr_title: "auto merge develop"
+            pr_body: "auto merge develop"
             
         - name: enable automerge for develop
           if: steps.open-pr-develop.outputs.pr_number != ''
