@@ -40,6 +40,7 @@ jobs:
           with:
             from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             to_branch: develop
+            user_name: GitHub Web Flow
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
@@ -48,6 +49,7 @@ jobs:
           with:
             from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             to_branch: main
+            user_name: GitHub Web Flow
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
