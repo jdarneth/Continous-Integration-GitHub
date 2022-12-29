@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'blackjack'
-version '1.0-SNAPSHOT'
+version CUR_VERSION
 
 repositories {
     mavenCentral()
