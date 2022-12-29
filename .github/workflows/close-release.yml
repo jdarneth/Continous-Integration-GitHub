@@ -26,7 +26,8 @@ jobs:
         - name: Initialize mandatory git config
           run: |
             git config user.name "GitHub Web Flow"
-            git config user.email "noreply@github.com"
+            git config user.email "actions@github.com"
+            git config --global --add safe.directory /github/workspace
 
         - name: Create release
           uses: ncipollo/release-action@v1
@@ -35,13 +36,15 @@ jobs:
             artifacts: ""
         
         - name: Merge to develop
-          uses: bambamboole/gha-upmerge@v1.0.1
+          uses: devmasx/merge-branch@master
           with:
-            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
-            to_branch: develop
-            
+            type: now
+            target_branch: develop
+            github_token: ${{ github.token }}
+          
         - name: Merge to main
-          uses: bambamboole/gha-upmerge@v1.0.1
+          uses: devmasx/merge-branch@master
           with:
-            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
-            to_branch: main
+            type: now
+            target_branch: main
+            github_token: ${{ github.token }}
