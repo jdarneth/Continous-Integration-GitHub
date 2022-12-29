@@ -1,4 +1,4 @@
-name: Close release
+name: Close release develop
 
 on:
   issues:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   close-release:
-      name: "Close release"
+      name: "Close release develop"
       runs-on: ubuntu-latest
       if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
       steps:
