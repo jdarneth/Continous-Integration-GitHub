@@ -1,34 +1,34 @@
-name: Create a new release branch
+name: Create new release
 
 on:
   issues:
     types: [opened, labeled]
 
 jobs:
-  draft-new-release:
+  create-new-release:
       name: "Create new release"
       runs-on: ubuntu-latest
       if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
       steps:
         - uses: actions/checkout@v3
 
-      - name: Extract version from issue title
-        run: |
-          TITLE="${{ github.event.issue.title }}"
-          VERSION=${TITLE#Release }
-          echo "::set-env name=RELEASE_VERSION::$VERSION"
-          
-      - name: Create release branch
-        run: git checkout -b release/${{ env.RELEASE_VERSION }}
-        
-      - name: Initialize mandatory git config
-        run: |
-          git config user.name "GitHub ACTION"
-          git config user.email "noreply@github.com"
-          
-      - name: Change version in gradle.properties
-        run: |
-          echo "CUR_VERSION=${{ env.RELEASE_VERSION }}" > ~/gradle.properties
+        - name: Extract version from issue title
+          run: |
+            TITLE="${{ github.event.issue.title }}"
+            VERSION=${TITLE#Release }
+            echo "::set-env name=RELEASE_VERSION::$VERSION"
 
-      - name: Push new branch
-        run: git push origin release/${{ env.RELEASE_VERSION }}
+        - name: Create release branch
+          run: git checkout -b release/${{ env.RELEASE_VERSION }}
+
+        - name: Initialize mandatory git config
+          run: |
+            git config user.name "GitHub ACTION"
+            git config user.email "noreply@github.com"
+
+        - name: Change version in gradle.properties
+          run: |
+            echo "CUR_VERSION=${{ env.RELEASE_VERSION }}" > ~/gradle.properties
+
+        - name: Push new branch
+          run: git push origin release/${{ env.RELEASE_VERSION }}
