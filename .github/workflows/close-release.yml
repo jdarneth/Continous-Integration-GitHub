@@ -1,0 +1,47 @@
+name: Close release
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  close-release:
+      name: "Close release"
+      runs-on: ubuntu-latest
+      if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
+      steps:
+      
+        - name: Extract release version
+          shell: bash
+          run: |
+            TITLE="${{ github.event.issue.title }}"
+            VERSION=${TITLE#Release }
+            echo "##[set-output name=version;]$(echo $VERSION)"
+          id: extract_release_version
+      
+        - uses: actions/checkout@v3
+          with: 
+            ref: "release/${{ steps.extract_release_version.outputs.version }}"
+            
+        - name: Initialize mandatory git config
+          run: |
+            git config user.name "GitHub Web Flow"
+            git config user.email "noreply@github.com"
+
+        - name: Create release
+          uses: ncipollo/release-action@v1
+          with:
+            tag: "release/${{ steps.extract_release_version.outputs.version }}"
+            artifacts: ""
+        
+        - name: Merge to develop
+          uses: bambamboole/gha-upmerge@v1.0.1
+          with:
+            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
+            to_branch: develop
+            
+        - name: Merge to main
+          uses: bambamboole/gha-upmerge@v1.0.1
+          with:
+            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
+            to_branch: main
