@@ -39,6 +39,7 @@ jobs:
           uses: devmasx/merge-branch@master
           with:
             type: now
+            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             target_branch: develop
             github_token: ${{ github.token }}
           
@@ -46,5 +47,6 @@ jobs:
           uses: devmasx/merge-branch@master
           with:
             type: now
+            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             target_branch: main
             github_token: ${{ github.token }}
