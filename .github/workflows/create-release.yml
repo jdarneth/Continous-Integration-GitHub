@@ -17,9 +17,17 @@ jobs:
             TITLE="${{ github.event.issue.title }}"
             VERSION=${TITLE#Release }
             echo "::set-env name=RELEASE_VERSION::$VERSION"
+            
+        - name: Extract branch name
+          shell: bash
+          run: |
+            TITLE="${{ github.event.issue.title }}"
+            VERSION=${TITLE#Release }
+            echo "##[set-output name=version;]$(echo $VERSION)"
+          id: extract_release_version
 
         - name: Create release branch
-          run: git checkout -b release/${{ env.RELEASE_VERSION }}
+          run: git checkout -b release/${{ steps.extract_release_version.outputs.version }}
 
         - name: Initialize mandatory git config
           run: |
@@ -28,7 +36,7 @@ jobs:
 
         - name: Change version in gradle.properties
           run: |
-            echo "CUR_VERSION=${{ env.RELEASE_VERSION }}" > ~/gradle.properties
+            echo "CUR_VERSION=${{ steps.extract_release_version.outputs.version }}" > ~/gradle.properties
 
         - name: Push new branch
-          run: git push origin release/${{ env.RELEASE_VERSION }}
+          run: git push origin release/${{ steps.extract_release_version.outputs.version }}
