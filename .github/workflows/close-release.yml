@@ -36,20 +36,15 @@ jobs:
             artifacts: ""
         
         - name: Merge to develop
-          uses: bambamboole/gha-upmerge@v1.0.1
+          uses: devmasx/merge-branch@master
           with:
-            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
-            to_branch: develop
-            user_name: GitHub Web Flow
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
+            type: now
+            target_branch: develop
+            github_token: ${{ github.token }}
+          
         - name: Merge to main
-          uses: bambamboole/gha-upmerge@v1.0.1
+          uses: devmasx/merge-branch@master
           with:
-            from_branch: "release/${{ steps.extract_release_version.outputs.version }}"
-            to_branch: main
-            user_name: GitHub Web Flow
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
+            type: now
+            target_branch: main
+            github_token: ${{ github.token }}
