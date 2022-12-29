@@ -46,9 +46,3 @@ jobs:
             token: ${{ secrets.GITHUB_TOKEN }}
             pull-request-number: ${{ steps.open-pr-develop.outputs.pr_number }}
             merge-method: merge
-        
-        - name: create release
-          uses: ncipollo/release-action@v1
-          with:
-            tag: "release/${{ steps.extract_release_version.outputs.version }}"
-            artifacts: ""
