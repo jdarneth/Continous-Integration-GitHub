@@ -26,7 +26,7 @@ jobs:
       
     - name: Extract branch name
       shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | tr 'release/' '')"
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | tr -d 'release/')"
       id: extract_branch
   
     - name: Run chmod to make gradlew executable
@@ -39,5 +39,5 @@ jobs:
         
     - uses: actions/upload-artifact@v3
       with: 
-        name: BLACKJACK-${{ steps.extract_branch.outputs.branch }}-SNAPSHOT
+        name: BLACKJACK-${{ steps.extract_branch.outputs.branch }}
         path: build/libs/
