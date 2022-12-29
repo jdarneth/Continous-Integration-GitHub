@@ -28,12 +28,6 @@ jobs:
             git config user.name "GitHub Web Flow"
             git config user.email "actions@github.com"
             git config --global --add safe.directory /github/workspace
-
-        - name: Create release
-          uses: ncipollo/release-action@v1
-          with:
-            tag: "release/${{ steps.extract_release_version.outputs.version }}"
-            artifacts: ""
         
         - name: Merge to develop
           uses: devmasx/merge-branch@master
@@ -48,3 +42,9 @@ jobs:
             type: now
             target_branch: main
             github_token: ${{ github.token }}
+            
+        - name: Create release
+          uses: ncipollo/release-action@v1
+          with:
+            tag: "release/${{ steps.extract_release_version.outputs.version }}"
+            artifacts: ""
