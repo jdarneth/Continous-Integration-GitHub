@@ -38,4 +38,7 @@ jobs:
             write-mode: 'overwrite'
 
         - name: Push new branch
-          run: git push origin release/${{ steps.extract_release_version.outputs.version }}
+          run: |
+            git add .
+            git commit -m "create release branch"
+            git push origin release/${{ steps.extract_release_version.outputs.version }}
