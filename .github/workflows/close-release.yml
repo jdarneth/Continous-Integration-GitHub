@@ -26,7 +26,8 @@ jobs:
         - name: Initialize mandatory git config
           run: |
             git config user.name "GitHub Web Flow"
-            git config user.email "noreply@github.com"
+            git config user.email "actions@github.com"
+            git config --global --add safe.directory /github/workspace
 
         - name: Create release
           uses: ncipollo/release-action@v1
