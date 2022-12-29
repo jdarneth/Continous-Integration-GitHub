@@ -31,7 +31,7 @@ jobs:
         
         - name: Merge release to main
           run: |
-              git fetch --unshallow
+              git fetch 
               git checkout main
               git pull
               git merge --no-ff release/${{ steps.extract_release_version.outputs.version }} -m "Auto-merge release to main"
@@ -39,7 +39,7 @@ jobs:
 
         - name: Merge release to develop
           run: |
-              git fetch --unshallow
+              git fetch 
               git checkout develop
               git pull
               git merge --no-ff release/${{ steps.extract_release_version.outputs.version }} -m "Auto-merge release to develop"
