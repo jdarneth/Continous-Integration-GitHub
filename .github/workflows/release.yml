@@ -3,10 +3,10 @@ name: RELEASE | build, test and create jar
 on:
   push:
     branches: 
-      - ['release/*']
+      - 'release/*'
   pull_request:
     branches:
-      - ['release/*']
+      - 'release/*'
 
 permissions:
   contents: read
@@ -23,7 +23,12 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        
+      
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+  
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
         
@@ -34,5 +39,5 @@ jobs:
         
     - uses: actions/upload-artifact@v3
       with: 
-        name: BLACKJACK-RELEASE-SNAPSHOT
+        name: BLACKJACK-${{ steps.extract_branch.outputs.branch }}-SNAPSHOT
         path: build/libs/
