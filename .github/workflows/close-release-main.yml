@@ -9,6 +9,10 @@ jobs:
       name: "Close release main"
       runs-on: ubuntu-latest
       if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
+      
+      permissions:
+        contents: write
+      
       steps:
       
         - name: Extract release version
@@ -55,8 +59,14 @@ jobs:
           with:
             arguments: build
         
+        - name: upload artifact
+          uses: actions/upload-artifact@v3
+          with: 
+            name: BLACKJACK-${{ steps.extract_branch.outputs.branch }}
+            path: artifacts/
+        
         - name: create release
           uses: ncipollo/release-action@v1
           with:
             tag: "release/${{ steps.extract_release_version.outputs.version }}"
-            artifacts: "build/libs/BLACKJACK-${{ steps.extract_release_version.outputs.version }}.jar"
+            artifacts: "artifacts/BLACKJACK-${{ steps.extract_release_version.outputs.version }}.zip"
