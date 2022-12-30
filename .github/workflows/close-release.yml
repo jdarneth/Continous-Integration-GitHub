@@ -86,6 +86,8 @@ jobs:
           destination_branch: develop
           pr_title: "auto merge develop"
           pr_body: "auto merge develop"
+          pr_draft: true
+          pr_allow_empty: true
 
       - name: enable automerge for develop
         if: steps.open-pr-develop.outputs.pr_number != ''
