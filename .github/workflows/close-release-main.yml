@@ -47,8 +47,16 @@ jobs:
             pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
             merge-method: merge
         
+        - name: Run chmod to make gradlew executable
+          run: chmod +x ./gradlew
+
+        - name: Build with Gradle
+          uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+          with:
+            arguments: build
+        
         - name: create release
           uses: ncipollo/release-action@v1
           with:
             tag: "release/${{ steps.extract_release_version.outputs.version }}"
-            artifacts: ""
+            artifacts: "build/libs/BLACKJACK-${{ steps.extract_release_version.outputs.version }}.jar"
