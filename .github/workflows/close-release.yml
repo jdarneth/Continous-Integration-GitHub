@@ -39,6 +39,8 @@ jobs:
             destination_branch: main
             pr_title: "auto merge main"
             pr_body: "auto merge main"
+            pr_draft: true
+            pr_allow_empty: true
             
         - name: enable automerge for main
           if: steps.open-pr-main.outputs.pr_number != ''
