@@ -32,13 +32,10 @@ jobs:
             git config user.name "GitHub Web Flow"
             git config user.email "actions@github.com"
             git config --global --add safe.directory /github/workspace
-        
-        - name: upgrade
-          run: brew update && brew upgrade hub
-        
+                
         - name: create pull request for main
           id: open-pr-main
-          uses: repo-sync/pull-request@v2
+          uses: repo-sync/pull-request@v2.11
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
