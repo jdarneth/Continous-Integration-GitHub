@@ -55,9 +55,6 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
 
-    permissions:
-      contents: write
-
     steps:
 
       - name: Extract release version
@@ -102,9 +99,6 @@ jobs:
     name: "create release"
     runs-on: ubuntu-latest
     if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
-
-    permissions:
-      contents: write
 
     steps:
 
