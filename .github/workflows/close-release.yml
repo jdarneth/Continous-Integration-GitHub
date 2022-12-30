@@ -5,54 +5,8 @@ on:
     types: [closed]
 
 jobs:
-  auto-merge-main:
-      name: "Close release main"
-      runs-on: ubuntu-latest
-      if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
-      
-      steps:
-      
-        - name: Extract release version
-          shell: bash
-          run: |
-            TITLE="${{ github.event.issue.title }}"
-            VERSION=${TITLE#Release }
-            echo "##[set-output name=version;]$(echo $VERSION)"
-          id: extract_release_version
-      
-        - uses: actions/checkout@v3
-          with: 
-            ref: "release/${{ steps.extract_release_version.outputs.version }}"
-            
-        - name: Initialize mandatory git config
-          run: |
-            git config user.name "GitHub Web Flow"
-            git config user.email "actions@github.com"
-            git config --global --add safe.directory /github/workspace
-                
-        - name: create pull request for main
-          id: open-pr-main
-          uses: repo-sync/pull-request@v2.11
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
-            destination_branch: main
-            pr_title: "auto merge main"
-            pr_body: "auto merge main"
-            pr_draft: true
-            pr_allow_empty: true
-            
-        - name: enable automerge for main
-          if: steps.open-pr-main.outputs.pr_number != ''
-          uses: peter-evans/enable-pull-request-automerge@v2
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
-            merge-method: merge
-
 
   auto-merge-develop:
-    needs: auto-merge-main
     name: "Close release develop"
     runs-on: ubuntu-latest
     if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
@@ -86,8 +40,6 @@ jobs:
           destination_branch: develop
           pr_title: "auto merge develop"
           pr_body: "auto merge develop"
-          pr_draft: true
-          pr_allow_empty: true
 
       - name: enable automerge for develop
         if: steps.open-pr-develop.outputs.pr_number != ''
@@ -96,10 +48,55 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-number: ${{ steps.open-pr-develop.outputs.pr_number }}
           merge-method: merge
+          
+          
+  auto-merge-main:
+      needs: auto-merge-develop
+      name: "Close release main"
+      runs-on: ubuntu-latest
+      if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
+      
+      steps:
+      
+        - name: Extract release version
+          shell: bash
+          run: |
+            TITLE="${{ github.event.issue.title }}"
+            VERSION=${TITLE#Release }
+            echo "##[set-output name=version;]$(echo $VERSION)"
+          id: extract_release_version
+      
+        - uses: actions/checkout@v3
+          with: 
+            ref: "release/${{ steps.extract_release_version.outputs.version }}"
+            
+        - name: Initialize mandatory git config
+          run: |
+            git config user.name "GitHub Web Flow"
+            git config user.email "actions@github.com"
+            git config --global --add safe.directory /github/workspace
+                
+        - name: create pull request for main
+          id: open-pr-main
+          uses: repo-sync/pull-request@v2.11
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
+            destination_branch: main
+            pr_title: "auto merge main"
+            pr_body: "auto merge main"
+            
+        - name: enable automerge for main
+          if: steps.open-pr-main.outputs.pr_number != ''
+          uses: peter-evans/enable-pull-request-automerge@v2
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
+            merge-method: merge
             
             
   create-release:
-    needs: auto-merge-develop
+    needs: auto-merge-main
     name: "create release"
     runs-on: ubuntu-latest
     if: startsWith(github.event.issue.title, 'Release') && contains(github.event.issue.labels.*.name, 'release')
