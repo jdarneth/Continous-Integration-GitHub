@@ -86,17 +86,10 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with: 
-          name: BLACKJACK-${{ steps.extract_branch.outputs.branch }}
-          path: artifacts/
-          
-      - name: Push new branch
-        run: |
-          git add .
-          git commit -m "create artifact"
-          git push origin release/${{ steps.extract_release_version.outputs.version }}
+          name: BLACKJACK-${{ steps.extract_release_version.outputs.branch }}
+          path: build/libs/
 
       - name: create release
         uses: ncipollo/release-action@v1
         with:
           tag: "release/${{ steps.extract_release_version.outputs.version }}"
-          artifacts: "artifacts/BLACKJACK-${{ steps.extract_release_version.outputs.version }}.zip"
