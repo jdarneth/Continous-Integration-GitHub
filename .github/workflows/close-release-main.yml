@@ -37,8 +37,9 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             destination_branch: main
-            pr_title: "auto merge main"
-            pr_body: "auto merge main"
+            pr_title: "merge release into main"
+            pr_body: "release finished: merge changes into main"
+            pr_label: "automerge"
 
         - name: automerge PR for main
           id: automerge-main
