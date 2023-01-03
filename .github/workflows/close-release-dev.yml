@@ -37,12 +37,15 @@ jobs:
             source_branch: "release/${{ steps.extract_release_version.outputs.version }}"
             destination_branch: develop
             pr_title: "auto merge develop"
-            pr_body: "auto merge develop"
-            
-        - name: enable automerge for develop
-          if: steps.open-pr-develop.outputs.pr_number != ''
-          uses: peter-evans/enable-pull-request-automerge@v2
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            pull-request-number: ${{ steps.open-pr-develop.outputs.pr_number }}
-            merge-method: merge
+            pr_body: "release finished: merge changes into develop"
+            pr_label: "automerge"
+
+        - name: automerge PR for develop
+          id: automerge-develop
+          uses: "pascalgn/automerge-action@v0.15.5"
+          env:
+            GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+            PULL_REQUEST: ${{ steps.open-pr-develop.outputs.pr_number }}
+            MERGE_DELETE_BRANCH: true
+            MERGE_RETRIES: "3"
+            MERGE_RETRY_SLEEP: "10000"
