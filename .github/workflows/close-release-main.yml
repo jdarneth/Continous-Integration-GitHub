@@ -88,16 +88,13 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with: 
-          name: Blackjack-${{steps.extract_release_version.outputs.version}}.zip
-          path: build/libs/
+          name: Blackjack-${{steps.extract_release_version.outputs.version}}
+          path: |
+            build/libs/
+            build/reports/
           
-      - name: run linux cmd
-        run: |
-          cd build/libs/
-          ls
-
       - name: create release
         uses: ncipollo/release-action@v1
         with:
           tag: "release/${{ steps.extract_release_version.outputs.version }}"
-          artifacts: build/libs/Blackjack-${{steps.extract_release_version.outputs.version}}.zip
+          artifacts: build/libs/Blackjack-${{steps.extract_release_version.outputs.version}}.jar
