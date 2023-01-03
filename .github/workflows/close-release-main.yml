@@ -47,7 +47,6 @@ jobs:
           env:
             GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
             PULL_REQUEST: ${{ steps.open-pr-main.outputs.pr_number }}
-            MERGE_DELETE_BRANCH: true
             MERGE_RETRIES: "3"
             MERGE_RETRY_SLEEP: "10000"
  
