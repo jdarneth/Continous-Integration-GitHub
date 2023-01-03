@@ -83,16 +83,21 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
+          arguments: build --scan
 
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with: 
-          name: BLACKJACK-${{ steps.extract_release_version.outputs.branch }}
+          name: Blackjack-${{steps.extract_release_version.outputs.version}}.zip
           path: build/libs/
+          
+      - name: run linux cmd
+        run: |
+          cd build/libs/
+          ls
 
       - name: create release
         uses: ncipollo/release-action@v1
         with:
           tag: "release/${{ steps.extract_release_version.outputs.version }}"
-          artifacts: build/libs/BLACKJACK-${{steps.extract_release_version.outputs.branch}}.jar
+          artifacts: build/libs/Blackjack-${{steps.extract_release_version.outputs.version}}.zip
