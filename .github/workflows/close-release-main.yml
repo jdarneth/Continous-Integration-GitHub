@@ -39,16 +39,18 @@ jobs:
             destination_branch: main
             pr_title: "auto merge main"
             pr_body: "auto merge main"
-            
-        - name: enable automerge for main
-          if: steps.open-pr-main.outputs.pr_number != ''
-          uses: peter-evans/enable-pull-request-automerge@v2
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            pull-request-number: ${{ steps.open-pr-main.outputs.pr_number }}
-            merge-method: merge
-            
-            
+
+        - name: automerge PR for main
+          id: automerge-main
+          uses: "pascalgn/automerge-action@v0.15.5"
+          env:
+            GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+            PULL_REQUEST: ${{ steps.open-pr-main.outputs.pr_number }}
+            MERGE_DELETE_BRANCH: true
+            MERGE_RETRIES: "3"
+            MERGE_RETRY_SLEEP: "10000"
+ 
+ 
   create-release:
     needs: auto-merge-main
     name: "create release"
