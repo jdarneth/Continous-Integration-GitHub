@@ -5,7 +5,7 @@ by Arneth Jakob (k11916206) & Peirlberger Jürgen (k11908871)
 ---
  * Proposal see [here](https://github.com/jdarneth/Continous-Integration-GitHub/blob/main/PROPOSAL.md)
  * Implementation see [here](https://github.com/jdarneth/Continous-Integration-GitHub/tree/main/Blackjack)
- * Miro board: see [here](https://miro.com/app/board/uXjVP2JsBig=/?share_link_id=493134313895)
+ * Miro board see [here](https://miro.com/app/board/uXjVP2JsBig=/?share_link_id=493134313895)
 
 ---
 ## Documentation 
