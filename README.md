@@ -18,6 +18,8 @@ With this project a Continuous Integration workflow for our chosen Java project 
 
 **Git Flow**
 
+![Git-Flow](/docu/gitFlow.png)
+
 The core branch for developing is the develop branch. Changes from this branch are not released directly. If a feature must be implemented, a new feature branch will branch off the develop branch. After the implementation of the feature, the changes are merged back into the develop branch. If a release has to be created, a new issue with a label _release_ must be opened. For this process, a new release branch is created out of the develop branch. After all implementation steps are done for the release, the issue will be closed. At last the release branch is merged back automatically into the main and the develop branch. Hotfixes are only for time-critical bugs, which should be released again as soon as possible.
 
 **GitHub Actions**
