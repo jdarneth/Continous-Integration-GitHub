@@ -22,8 +22,7 @@ by Arneth Jakob (k11916206) & Peirlberger Jürgen (k11908871)
 **=> JAKOB** 
 
 ### Technology-Stack
-
-.. img here ..
+![Technology-Stack](/docu/technologyStack.png)
 
  * **Java:**
  * **GIT / GIT flow:**
