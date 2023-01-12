@@ -1,4 +1,4 @@
-name: HOTFIX | MAIN | build and test
+name: build and test
 
 on:
   push:
