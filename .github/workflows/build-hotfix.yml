@@ -1,9 +1,11 @@
-name: HOTFIX | build and test
+name: HOTFIX | MAIN | build and test
 
 on:
   push:
     branches:
       - 'hotfix/*'
+      - 'feature/*'
+      - 'main'
 
 permissions:
   contents: read
