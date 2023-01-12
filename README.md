@@ -11,15 +11,17 @@ by Arneth Jakob (k11916206) & Peirlberger Jürgen (k11908871)
 ## Documentation 
 
 ### Motivation
-   * The reason why we chose this topic is that we are working both in the same company in Linz. Currently, the company uses SVN as version control system but the company plans to migrate the whole software stack from SVN to Git. The process already started and will continue the next few months. Due to the migration from SVN to Git, we as developers get in touch with Git almost on a daily basis. Therefore, it is interesting for us to implement a Continous Integration and an own Git flow since we are getting a lot in touch with Git in these days. Also a personal interest for the topic is existing.
+The reason why we chose this topic is that we are working both in the same company in Linz. Currently, the company uses SVN as version control system but the company plans to migrate the whole software stack from SVN to Git. The process already started and will continue the next few months. Due to the migration from SVN to Git, we as developers get in touch with Git almost on a daily basis. Therefore, it is interesting for us to implement a Continous Integration and an own Git flow since we are getting a lot in touch with Git in these days. Also a personal interest for the topic is existing.
 
 ### Background / theoretical basis
 With this project a Continuous Integration workflow for our chosen Java project Black Jack was implemented. For this process, GitHub (Git) was used as version control system and GitHub Actions (with Gradle) was used as a build tool. The result of the build (the artifact) is a JAR file, which is persisted in the public release of each version. Furthermore, Git Flow was used for this project.
 
 **Git Flow**
+
 The core branch for developing is the develop branch. Changes from this branch are not released directly. If a feature must be implemented, a new feature branch will branch off the develop branch. After the implementation of the feature, the changes are merged back into the develop branch. If a release has to be created, a new issue with a label _release_ must be opened. For this process, a new release branch is created out of the develop branch. After all implementation steps are done for the release, the issue will be closed. At last the release branch is merged back automatically into the main and the develop branch. Hotfixes are only for time-critical bugs, which should be released again as soon as possible.
 
-*GitHub Actions*
+**GitHub Actions**
+
 With GitHub Actions a workflow for the Continuous Integration will be defined. It will be used to automatically test and release the code.
 
   * Feature branch: Trigger following workflow on GIT push. Execute build and tests (can fail temporarily).
