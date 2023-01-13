@@ -33,7 +33,10 @@ With GitHub Actions a workflow for the Continuous Integration will be defined. I
   * Hotfix branch: Trigger following workflow on GIT push. Execute build and tests.
 
 ### Project structure
-**=> JAKOB** 
+  * The GitHub Actions workflows for the project are located in the _.github/workflows_ directory.
+  * The source code and the tests are located in the _src_ directory.
+  * The project is a standard gradle project with all related settings files.
+  * In the _gradle.properties_ file the current version of the project is defined.
 
 ### Technology-Stack
 ![Technology-Stack](/docu/technStack.png)
