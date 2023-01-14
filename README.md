@@ -43,12 +43,12 @@ The next step is, to release recently added and changed bugs or features. To sta
    * Issue title must match ``Release <versionNumber>``
    * Issue must have the label ``Release``
    
-![Git flow: feature branch](/docu/gitFlow_release.png)
+![Create Issue](/docu/tutorial_issue.png)
 
 Now, keep the ticket open until everything is tested! If there are any bugs, add the bugfix to the release-branch. For each push-event in the release-branch, the build is started to verify the commit and furthermore, a JAR-File is generated to allow manual testing of the feature (if necessary?).
 To finish the release, just close the issue. By closing the issue, the changes from the release branch are automatically merged to ``main`` and ``develop``. The main branch then contains all changes to be released and the develop contains the recently done bug fixes. Furthermore, the current state will be tagged and a "GitHub public release" is created for the repository. This release contains the current version of the source code and a ready-to-use artifact (JAR-File):
 
-![Git flow: feature branch](/docu/tutorial_release.png)
+![GitHub public release](/docu/tutorial_release.png)
 
 ----
 
