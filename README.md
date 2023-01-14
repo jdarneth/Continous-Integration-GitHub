@@ -34,27 +34,25 @@ In general, all (implementation) work is happening along the ``develop`` branch.
 
 ![Git flow: feature branch](/docu/gitFlow_feature.png)
 
- * For each commit in the feature-branch, the build gets automatically started and verify language (build) and functional (tests) correctness.
- * For each commit in the develop-branch (happens when finished feature is merged back), also the build is started. Furthermore, a JAR-File is generated to allow manual testing of the feature (if necessary?). 
+ * For each push-event in the feature-branch, the build gets automatically started and verify language (build) and functional (tests) correctness.
+ * For each push-event in the develop-branch (happens when finished feature is merged back), also the build is started. Furthermore, a JAR-File is generated to allow manual testing of the feature (if necessary?). 
 
 ---
 
-The next step is, to release recently added and changed bugs or features. In general, the following steps are necessary to do a release: 
- * create a ``release-branch`` based on develop
- * change the current software version in the gradle settings.
- * test branch and add necessary bug fixes to the release branch. 
- * If successfully tested, merge the release branch to ``main`` and ``develop``. The main branch then contains all changes to be released and the develop contains the recently done bug fixes. 
- * The last step is to create a tag for current release version.
-
+The next step is, to release recently added and changed bugs or features. To start a release, it is enough to [create a new issue](https://github.com/jdarneth/Continous-Integration-GitHub/issues/new). By creating this issue, the release branch will be created and the release version will be automatically changed according to the issue-title. The issue must consider the following rules:
+   * Issue title must match ``Release <versionNumber>``
+   * Issue must have the label ``Release``
+   
 ![Git flow: feature branch](/docu/gitFlow_release.png)
 
- * In our project it is enough, to [create a new issue](https://github.com/jdarneth/Continous-Integration-GitHub/issues/new). By creating a issue, the release branch will be created and the release version will be automatically changed according to the issue-title. Consider the following rules:
-   * Issue title must match ``Release <version>``
-   * Issue must have the label ``Release``
- * Keep the ticket open! Now bug-fixes can be added...
- * To finish the release, just close the issue. 
+Now, keep the ticket open until everything is tested! If there are any bugs, add the bugfix to the release-branch. For each push-event in the release-branch, the build is started to verify the commit and furthermore, a JAR-File is generated to allow manual testing of the feature (if necessary?).
+To finish the release, just close the issue. By closing the issue, the changes from the release branch are automatically merged to ``main`` and ``develop``. The main branch then contains all changes to be released and the develop contains the recently done bug fixes. Furthermore, the current state will be tagged and a "GitHub public release" is created for the repository. This release contains the current version of the source code and a ready-to-use artifact (JAR-File):
 
-**=> JÜRGEN** 
+![Git flow: feature branch](/docu/tutorial_release.png)
+
+----
+
+In general, for each push-event to the repository, visit GitHub-UI and check if the commit have passed all automated tests. All executed jobs can be found in the [GitHub-Actions-Tab](https://github.com/jdarneth/Continous-Integration-GitHub/actions) of your repository. 
 
 ### Lessons-learned / Problems
    * wie auf Folien nur ausführlicher
