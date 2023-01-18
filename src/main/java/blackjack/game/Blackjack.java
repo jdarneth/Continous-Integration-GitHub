@@ -166,7 +166,7 @@ public class Blackjack {
 	public GameResult evaluateCards() {
 		
 		if(human.getValue() > dealer.getValue()) {
-			return GameResult.PlayerWins; 
+			return GameResult.DealerWins; 
 		}
 		else if(human.getValue() < dealer.getValue()) {
 			return GameResult.DealerWins; 
